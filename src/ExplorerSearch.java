@@ -36,15 +36,44 @@ public class ExplorerSearch {
 
         boolean[][] visited = new boolean[island.length][island[0].length];
 
-        //return reachableArea(island, start, visited);
-        return -1;
+        int total = 0;
+
+        return reachableArea(island, start, visited, total);
     }
 
     // plan:
     // 1. find explorer start location [done]
-    // 2. make possible moves for the explorer
+    // 2. make possible moves for the explorer [done]
     // 3. make helper method that uses possible moves
     // 4. call helper method in original method
+
+    public static int reachableArea(int[][] island, int[] current, boolean[][] visited, int total)
+    {
+        int curC = current[0];
+        int curR = current[1];
+
+        if (island[curR][curC] == 1)
+        {
+            total += 1;
+        }
+
+        visited[curR][curC] = true;
+        total++;
+
+        List<int[]> neighbors = possibleMoves(island, current);
+
+        for (int[] neighbor : neighbors)
+        {
+            int reachableMove = reachableArea(island, neighbor, visited, total);
+            
+            if (reachableMove >= 0)
+            {
+                return total;
+            }
+        }
+
+        return -1;
+    }
 
     public static List<int[]> possibleMoves(int[][] island, int[] current)
     {
