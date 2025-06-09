@@ -47,8 +47,8 @@ public class ExplorerSearch {
 
     public static int reachableArea(int[][] island, int[] current, boolean[][] visited)
     {
-        int curC = current[0];
-        int curR = current[1];
+        int curR = current[0];
+        int curC = current[1];
 
         // if current spot visited
         if (visited[curR][curC])
