@@ -40,6 +40,12 @@ public class ExplorerSearch {
         return -1;
     }
 
+    // plan:
+    // 1. find explorer start location
+    // 2. make possible moves for the explorer
+    // 3. make helper method that uses possible moves
+    // 4. call helper method in original method
+
     public static int[] explorerLocation(int[][] island)
     {
         for (int r = 0; r < island.length; r++)
