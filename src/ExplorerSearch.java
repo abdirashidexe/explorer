@@ -103,6 +103,9 @@ public class ExplorerSearch {
         newC = curC;
 
         if (newR < island.length && island[newR][newC] != 2 && island[newR][newC] != 3)
+        {
+            moves.add(new int[]{newR, newC});
+        }
 
         // left
         newR = curR;
