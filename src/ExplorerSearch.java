@@ -32,10 +32,27 @@ public class ExplorerSearch {
         // Implement your method here!
         // Please also make more test cases
         // I STRONGLY RECOMMEND testing some helpers you might make too
-        int[] start;
+        int[] start = explorerLocation(island);
 
         boolean[][] visited = new boolean[island.length][island[0].length];
 
+        //return reachableArea(island, start, visited);
         return -1;
+    }
+
+    public static int[] explorerLocation(int[][] island)
+    {
+        for (int r = 0; r < island.length; r++)
+        {
+            for (int c = 0; c < island[r].length; c++)
+            {
+                if (island[r][c] == 0)
+                {
+                    int[] explorer = new int[]{r, c};
+                    return explorer;
+                }
+            }
+        }
+        throw new IllegalArgumentException("No explorer found");
     }
 }
