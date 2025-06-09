@@ -36,9 +36,7 @@ public class ExplorerSearch {
 
         boolean[][] visited = new boolean[island.length][island[0].length];
 
-        int total = 0;
-
-        return reachableArea(island, start, visited, total);
+        return reachableArea(island, start, visited);
     }
 
     // plan:
@@ -47,32 +45,42 @@ public class ExplorerSearch {
     // 3. make helper method that uses possible moves
     // 4. call helper method in original method
 
-    public static int reachableArea(int[][] island, int[] current, boolean[][] visited, int total)
+    public static int reachableArea(int[][] island, int[] current, boolean[][] visited)
     {
         int curC = current[0];
         int curR = current[1];
 
-        if (island[curR][curC] == 1)
+        // if current spot visited
+        if (visited[curR][curC])
+        {
+            return 0;
+        }
+
+        // if 2 or 3 (water or mountain), return 0
+        if (island[curR][curC] == 2 || island[curR][curC] == 3)
+        {
+            return 0;
+        }
+
+        // mark current as visited
+        visited[curR][curC] = true;
+        int total = 0;
+
+        // if starting (0) or walkable (1), add to total
+        if (island[curR][curC] == 0 || island[curR][curC] == 1)
         {
             total += 1;
         }
-
-        visited[curR][curC] = true;
-        total++;
 
         List<int[]> neighbors = possibleMoves(island, current);
 
         for (int[] neighbor : neighbors)
         {
-            int reachableMove = reachableArea(island, neighbor, visited, total);
-            
-            if (reachableMove >= 0)
-            {
-                return total;
-            }
+            int currentTotal = reachableArea(island, neighbor, visited);
+            total += currentTotal;
         }
 
-        return -1;
+        return total;
     }
 
     public static List<int[]> possibleMoves(int[][] island, int[] current)
